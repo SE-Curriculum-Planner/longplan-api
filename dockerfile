@@ -24,7 +24,6 @@ RUN apk update && apk add --no-cache tzdata && cp /usr/share/zoneinfo/Asia/Bangk
 
 # Copy the built binary from the previous stage
 COPY --from=builder /app/backend /usr/local/bin/backend
-COPY --from=builder /app/config /config
 
 # Expose the port your application listens on
 EXPOSE 8000
