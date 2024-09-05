@@ -24,23 +24,18 @@ jobs:
     - name: Test
       run: go test -v ./...
 
-    - name: Build Go app
-      run: |
-          go mod tidy
-          go build -o app .
-
-    - name: Set up Docker
-      uses: docker/setup-buildx-action@v2
+    - name: Static code analysis
+      run: go vet -v ./...
       
     - name: Build Docker image
       run: |
-          docker build -t my-go-app .
+          docker build -t longplan-api:latest .
           
     - name: Stop and remove old container
       run: |
-          docker stop my-go-app || true
-          docker rm my-go-app || true
+          docker stop longplan-api || true
+          docker rm longplan-api || true
 
     - name: Deploy Docker container
       run: |
-          docker run -d --name my-go-app -p 8080:8080 my-go-app
+          docker run -d --name longplan-api -p 8080:8080 longplan-api
