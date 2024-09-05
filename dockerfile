@@ -26,7 +26,7 @@ RUN apk update && apk add --no-cache tzdata && cp /usr/share/zoneinfo/Asia/Bangk
 COPY --from=builder /app/backend /usr/local/bin/backend
 
 # Expose the port your application listens on
-EXPOSE 8000
+# EXPOSE 8000
 
 # Set the command to start your application
 CMD ["/usr/local/bin/backend"]
